@@ -5,39 +5,50 @@ from bs4 import BeautifulSoup
 import requests
 
 class Scraper:
-    def __init__(self, url, search_list):
+    def __init__(self, url):
         self.url = url
-        self.search_list = search_list
         self.web_page = url
+        print(self.web_page)
 
     @property
     def web_page(self):
-        return self.web_page
+        return self._web_page
     
     @web_page.setter
-    def _web_page(url):
-        _web_page = requests.get(url)
-        return _web_page
+    def web_page(self, url):
+        self._web_page = requests.get(url)
     
-    def scrape(self, web_page=None, search_list=None):
+    def scrape(self, search_list):
         """
-        Retrieves all of the elements of the passed web page as defined in the passed search_dict.
+        Retrieves all of the elements of the passed web page as defined in the passed search_list.
 
         Args:
-            web_page (request, optional): The web page to be scraped. Defaults to None.
-            search_dict (list, optional): A list of dicts containing html tags and class attributes. Defaults to None.
+            search_list (list, optional): A list of dicts containing html tags and class attributes.
 
         Returns:
             list: Containing the results from the scrape.
         """
         try:
             result = list()
-            parsed_web_page = BeautifulSoup(web_page.text, 'html.parser')
+            parsed_web_page = BeautifulSoup(self.web_page.text, 'html.parser')
             for search_dict in search_list:
                 html_tag = search_dict.get('html_tag')
                 class_attribute = search_dict.get('class_attribute')
                 scraped_data = parsed_web_page.findAll(html_tag, attrs={'class': class_attribute})
-                result.append(scraped_data)
+                for element in scraped_data:
+                    result.append(element.text)
         except Exception as e:
+            print('Exception occurred')
             print(e)
         return result
+
+url = 'http://quotes.toscrape.com/'
+test_scrape = Scraper(url)
+search_list = [
+    {
+    'html_tag': 'span',
+    'class_attribute': 'text'
+    }
+]
+test_result = test_scrape.scrape(search_list)
+print(test_result)
