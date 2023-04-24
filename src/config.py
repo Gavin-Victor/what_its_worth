@@ -3,8 +3,8 @@ PATH = sys.path
 PATH.append('C:/Users/gavin/OneDrive/Documents/what_its_worth/env/lib/python3.10/site-packages')
 import requests
 
-CLIENT_ID_REDDIT = '8ZrQ3Lr43pcHKbR92XzB-A'
-SECRET_KEY_REDDIT = 's9thChLSnIqcibmmWZzhaFF2rY4gRQ'
+CLIENT_ID_REDDIT = 'rGBVgRbxmtw4gYrZUxLlsQ'
+SECRET_KEY_REDDIT = 'Q4PiEDQJKN7WdsdLToRhUfjlxjS6-A'
 
 with open(r'C:\Users\gavin\OneDrive\Documents\what_its_worth\src\pw_reddit.txt', 'r') as file:
     pw_reddit = file.read()
