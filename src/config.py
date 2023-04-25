@@ -19,10 +19,12 @@ headers_reddit = {'User-Agent': 'what_its_worth/0.0.1'}
 response_reddit_access_token = requests.post('https://www.reddit.com/api/v1/access_token',
                     auth=auth_reddit, data=data_reddit, headers=headers_reddit)
 
-print(response_reddit_access_token.json())
-
 TOKEN_REDDIT = response_reddit_access_token.json()['access_token']
 headers_reddit['Authorization'] = f'bearer {TOKEN_REDDIT}'
+headers = {
+    'reddit': headers_reddit
+}
 
-response_reddit = requests.get('https://oauth.reddit.com/api/v1/me', headers=headers_reddit).json()
-print(response_reddit)
+base_urls = {
+    'reddit': 'https://oauth.reddit.com'
+}

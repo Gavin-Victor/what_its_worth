@@ -8,7 +8,6 @@ class Scraper:
     def __init__(self, url):
         self.url = url
         self.web_page = url
-        print(self.web_page)
 
     @property
     def web_page(self):
@@ -41,14 +40,3 @@ class Scraper:
             print('Exception occurred')
             print(e)
         return result
-
-url = 'http://quotes.toscrape.com/'
-test_scrape = Scraper(url)
-search_list = [
-    {
-    'html_tag': 'span',
-    'class_attribute': 'text'
-    }
-]
-test_result = test_scrape.scrape(search_list)
-print(test_result)
